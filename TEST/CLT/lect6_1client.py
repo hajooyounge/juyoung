@@ -1,0 +1,30 @@
+import socket
+import sys
+import time
+
+HOST = '127.0.0.1'
+PORT = 8080
+
+BUFSIZE = 1024
+ADDR = (HOST,PORT)
+
+"""
+#1 서버에 접속하기 위한 소켓을 생성한다.
+clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+#2. 서버에 접속을 시도한다.
+clientSocket.connect(ADDR)
+print('connect is success')\
+"""
+
+clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+clientSocket.connect(ADDR)
+
+while True:
+    message = input('client : ')
+    clientSocket.send(message.encode('utf-8'))
+    response = clientSocket.recv(1024)
+    print ('server : ', response.decode('utf-8'))
+    respinse = "/0"
+
+clientSocket.close()
