@@ -1,212 +1,3 @@
-#입력 암호화
-"""
-import getpass
-
-#pw = getpass.getpass("pass : ")
-pw = input("pass : ")
-print(pw)
-"""
-
-#해시알고리즘
-"""
-import hashlib
-
-hl = hashlib.sha256()
-#target = "hello"
-#target = "hi"
-#target = "world"
-#target = "python"
-#target = "media"
-#target = "media program"
-#target = "123456789"
-target = "to be or not to be, That is a question!"
-
-
-hl.update(target.encode("utf-8"))
-print(hl.headigest())
-#print(hl.digest())
-"""
-
-#keccak256
-"""
-import Crypto.Hash.keccak as kek
-
-#target = "hello"
-#target = "hi"
-#target = "world"
-#target = "python"
-#target = "media"
-#target = "media program"
-#target = "123456789"
-target = "to be or not to be, That is a question!"
-
-kksh = kek.new(digest_bits=256)
-kksh.update(target.encode("utf-8"))
-
-#print(kksh.digest())
-print(kksh.hexdigest())
-"""
-
-#입력키 변환
-"""
-import getpass
-import hashlib 
-
-pw = getpass.getpass("pass : ")
-print(pw)
-
-h1 = hashlib.sha256()
-
-h1.update(pw.encode("utf-8"))
-print(h1.digest())
-print(h1.hexdigest())
-"""
-
-#입력 파일 저장
-"""
-import hashlib
-import os
-
-def pwInsert():
-    if os.path.exists('pw.txt'):
-        pw = input('input pass :')
-        hs = hashlib.sha256()
-        hs.update(pw.encode("utf-8"))
-        with open('pw.txt', 'r') as fp:
-            return hs. hexdigest() == fp.read()
-    else:
-        return True
-    
-if pwInsert():
-    pw = input('new pass :')
-    with open('pw.txt', 'w') as fp:
-        hs= hashlib.sha256() 
-        hs.update(pw.encode("utf-8"))
-        fp.write(hs.hexdigest())
-
-else:
-    print("not allow password")
-"""
-
-#시스템 정보
-"""
-import platform as pf
-
-pn = pf.uname()
-print(pn)
-
-pm = pf.machine()
-print(pm)
-
-pp = pf.processor()
-print(pp)
-
-ps = pf.system()
-print(ps)
-"""
-
-#웹페이지 읽기 1
-"""
-import urllib.request  as ur
-
-url = 'https://www.google.com'
-
-res = ur.urlopen(url)
-
-web = res.read()
-
-with open("ul.html", "wb") as fp:
-    fp.write(web)
-    
-print(web)
-"""
-
-#웹페이지 읽기 2
-"""
-import http.client as hc
-
-#url = 'https://www.google.com'
-#url = 'www.google.com'
-#url = 'www.daum.net'
-url = 'v.daum.net'
-
-#conn = http.client.HTTPSConnection(url)
-conn = hc.HTTPSConnection(url)
-#conn.request("GET", "/")
-conn.request("GET", "/v/20231103063908539")
-
-r = conn.getresponse()
-
-
-with open("ul.html", "wb") as fp:
-    fp.write(r.read())
-    
-conn.close()
-
-print(r)
-"""
-    
-#웹페이지 읽기 3
-"""
-import requests   
-
-url = "https://www.google.com"
-res = requests.get(url)
-web = res.content
-
-with open("ulrp.html", "wb") as fp:
-    fp.write(web)
-    
-print(web)
-"""
-
-
-#싱글스레드
-"""
-import time
-
-def counter(str_name):
-    for i in range(50000):
-        print(f"Countdown {i}, name : {str_name}\n")
-        
-start = time.time()
-for i in range(3) :
-    counter(f"num{i}")
-    
-end = time.time()
-        
-#print("single end")
-print("single end", end - start)
-"""
-
-#멀티스레드
-"""
-import threading as td
-import time
-
-def counter(str_name):
-    for i in range(50000):
-        print(f"Countdown {i}, name : {str_name}\n")
-        
-
-
-thread1 = td.Thread(target=counter, args=("1num",))
-thread2 = td.Thread(target=counter, args=("2num", ))
-thread3 = td.Thread(target=counter, args=("3num", ))
-
-start = time.time()
-
-thread1.start()
-thread2.start()
-thread3.start() 
-
-thread1.join() 
-thread2.join()
-thread3.join()
-end = time.time()
- 
-print("multi end" , end- start)
-"""
 
 #병렬처리
 """
@@ -417,18 +208,16 @@ with open("fktemp.txt", "w", newline='')as f :
                 temp.color_name() + "\n")
 """
 # 시스템명령어 사용
-"""
-import subprocess as sp
+""" import subprocess as sp
+
 
 #res = sp.run(["cmd", "/c", "dir"], capture_output=True)
-#res = sp.run(["cmd", "/c", "dir"], capture_output=False)
-#res = sp.run(["cmd", "/c", "ipconfig", "/all"], capture_output=False)
-res = sp.run(["cmd", "/c", "ipconfig", "/all"], capture_output=True)
-print(res)
-"""
+#res = sp.run(["cmd", "/c","ipconfig ," /all"])
+res = sp.run(["cmd", "/c", "C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe"])
+print(res) """
 
 #에러 처리
-
+"""
 import traceback as td
 
 def  tester():
@@ -460,4 +249,112 @@ def main():
         
     #except:
     #    print(tb.format_exc())        
+"""    
+
+#태그 찾기
+"""
+from bs4 import BeautifulSoup as bs
+import requests as rq
+
+# url = "https"//xkcd.com/2852/
+url = "https://news.daum.net/"
+res = rq.get(url)
+
+hmltxt = res.text
+res_html = bs(hmltxt, "html.parser")
+
+pres = res_html.find("h2")
+print(pres)
+print("\n1 -------------------- \n")
+print(pres.get_text().strip())
+print("\n2 -------------------- \n")
+print(pres.next_element.get_text().strip())
+print("\n5 -------------------- \n")
+print(pres.get_text())
+
+
+tres = res_html.find("title")
+print(tres)
+print("\n1 -------------------- \n")
+print(tres.next_element)
+print("\n3 -------------------- \n")
+print(tres.get_text().strip())
+
+
+
+fares = res_html.findAll("a")
+for i in fares:
+    print(i.get_text())
+        
+# print(fares)
+print("\n5 -------------------- \n")
+
+clres = res_html.findAll(class_  = "doc - title")
+print(clres)
+
+print("\n6 -------------------- \n")
+clrs = res_html.find(class_ = "head_top")
+print(clrs)
+print(clrs.get_text())
+
+#셀렉터로 찾기
+
+from bs4 import BeautifulSoup as bs
+import requests as rq
+
+# url = "https"//xkcd.com/2852/
+url = "https://news.daum.net/"
+res = rq.get(url)
+
+hmltxt = res.text
+res_html = bs(hmltxt, "html.parser")
+
+item = res_html.select_one("body > div.container-doc")
+
+print(item)
+print(item.get_text())
+print("\n90----------------\n")
+print(item)
+print(item.get_text().strip())
+
+print(item.get_text())
+
+wt = res_html.select_one("#content_table > div.table_group > div:nth-child(3) > div.item_detail > a > div > span.txt_name")
+#print(wt)
+# print(wt.get_text())
+
+
+goods = res_html.select_one("#content_table > div.table_group > div:nth-child(3) > div.item_reply > div > button > strong")
+print(goods)
+# print(goods.get_text()) 
+"""
+
+
+
+
+#select 
+"""
+from bs4 import BeautifulSoup as bs
+import requests as rq
+
+# url = "https"//xkcd.com/2852/
+url = "https://news.daum.net/"
+res = rq.get(url)
+
+hmltxt = res.text
+res_html = bs(hmltxt, "html.parser")
+
+iss = res_html.select("a.wrap_thumb")
+
+print("\n--------------------\n")
+
+for i in iss :
+    issue = i.get_text()
+    print(issue)
     
+print("\n----------------\n")   
+ct = res_html.select("a.wrap_thumb")
+for j in ct :
+    c = j.attrs["data-tiara-custom"] 
+    print(c + "\n")   
+"""

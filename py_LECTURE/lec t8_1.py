@@ -369,7 +369,7 @@ p1.setNumber("11111111111")
 p1.setNumber("22222222222") 
 """
 
-
+"""
 class champion:
     lv = 1
     movSpd = 0
@@ -414,7 +414,7 @@ mipo.printStatus()
 
 mipo.beAtk(63.0)
 mipo.printStatus()
-
+"""
 
 
 #상속 초기 -1
