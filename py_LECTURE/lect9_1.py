@@ -333,7 +333,7 @@ print(goods)
 
 
 #select 
-"""
+
 from bs4 import BeautifulSoup as bs
 import requests as rq
 
@@ -356,5 +356,5 @@ print("\n----------------\n")
 ct = res_html.select("a.wrap_thumb")
 for j in ct :
     c = j.attrs["data-tiara-custom"] 
+    c = j.attrs["data-tiara-id"] 
     print(c + "\n")   
-"""
