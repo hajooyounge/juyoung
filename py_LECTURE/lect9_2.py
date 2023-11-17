@@ -1,366 +1,335 @@
-#셀렉터로 찾기
+#dataFrme
 """
-from bs4 import BeautifulSoup as bs
-import requests as rq
+import pandas as pd
 
-# url = "https"//xkcd.com/2852/
-url = "https://news.daum.net/"
-res = rq.get(url)
+df = pd.DataFrame([["a", "b", "c"], ["d", "e", "f"], ["g", "h", "i"]])
 
-hmltxt = res.text
-res_html = bs(hmltxt, "html.parser")
+print(df)
+print("\n------------------\n")
 
-item = res_html.select_one("body > div.container-doc")
+print(df[1])
+print("\n------------------\n")
 
-print(item)
-print(item.get_text())
-print("\n90----------------\n")
-print(item)
-print(item.get_text().strip())
-
-print(item.get_text())
-
-wt = res_html.select_one("#content_table > div.table_group > div:nth-child(3) > div.item_detail > a > div > span.txt_name")
-#print(wt)
-# print(wt.get_text())
-
-
-goods = res_html.select_one("#content_table > div.table_group > div:nth-child(3) > div.item_reply > div > button > strong")
-print(goods)
-# print(goods.get_text()) 
+print(df[1][1])
+print("\n------------------\n")
+print(df[2][2])
 """
 
-#select 
+#dataFrme 출력
 """
-from bs4 import BeautifulSoup as bs
-import requests as rq
-
-# url = "https"//xkcd.com/2852/
-url = "https://news.daum.net/"
-res = rq.get(url)
-
-hmltxt = res.text
-res_html = bs(hmltxt, "html.parser")
-
-iss = res_html.select("a.wrap_thumb")
-
-print("\n--------------------\n")
-
-for i in iss :
-    issue = i.get_text()
-    print(issue)
-    
-print("\n----------------\n")   
-ct = res_html.select("a.wrap_thumb")
-for j in ct :
-    c = j.attrs["data-tiara-custom"] 
-    c = j.attrs["data-tiara-id"] 
-    print(c + "\n")   
-"""
-
-
-
-#이미지 저장
-"""
-from bs4 import BeautifulSoup as bs
-import requests as rq
-import os
-from urllib.request import urlretrieve as rl
-
-url = "https://news.daum.net/"
-res = rq.get(url)
-
-hmltxt = res.text
-res_html = bs(hmltxt, "html.parser")
-
-imgs = res_html.select("lmg")
-print(imgs)
-print("\n--------------------------\n")
-
-linkimgs = []
-
-for i in imgs :
-    irs = i.attrs
-    print(irs + "\n")
-    
-#print(linkimgs)
-
-folder = "imgs/"
-if not os.path.isdir(folder):
-    os.mkdir(folder)
-    
-i = 0
-for ln in linkimgs:
-    if str(ln).find("//t")== False:
-        print(ln)
-        continue
-    else:
-        pass
-    i += 1
-    rl(ln, float + f"{i}.jpg")
-    #print(ln)
-    #linkimgs.append(img.attrs{'src'})
-"""
-
-#시리즈 생성
-"""
-from pandas import Series  as sr
-
-data = [10, 20,30, 40]
-sdata = sr(data)
-
-print(sdata)
-"""
-
-#numpy 시리즈 생성
-"""
-from pandas import Series  as sr
-import numpy as np
-
-data = np.arrange(1, 5)
-sdata = sr(data)
-
-print(sdata)
-"""
-
-#인덱스 확인
-"""
-from pandas import Series  as sr
-
-data = [10, 20,30, 40]
-sdata = sr(data)
-
-print(sdata.index)
-#print(sdata.index.to_list())
-"""
-
-#인덱스 설정
-"""
-
-from pandas import Series  as sr
-
-data = [10, 20,30, 40]
-sdata = sr(data)
-print(sdata)
-print("\n--------------------------\n")
-
-sdata.index = ["a", "b", "c", "d"]
-print(sdata)
-"""
-#인덱스 생성 1
-"""
-from pandas import Series as sr 
-dt = [10, 20,30, 40]
-idx = ["a", "b", "c", "d"]
-
-
-sdata = sr(dt,idx)
-print(sdata)
-"""
-
-
-
-#인덱스 생성 2
-
-from pandas import Series as sr  
-dt = [10, 20,30, 40]
-idx = ["a", "b", "c", "d"]
-
-#sd = sr(dt, idx)
-#print(sd)
-
-#sdata = sr(data = dt, index= idx)
-#sdata = sr(data = idx, index= dt)
-#sdata = sr(dt,idx)
-sdata = sr(idx, dt)
-print(sdata)
-
-
-
-#인덱싱 3
-"""
-from pandas import Series as sr  
-dt = [10, 20,30, 40]
-idx = ["a", "b", "c", "d"]
-sdata = sr(data= dt, index= idx)
-
-#print(sdata)
-
-#sd= sdata.reindex({"a", "b", "c"})
-#sd= sdata.reindex({"a", "c"})
-#sd= sdata.reindex({"b"})
-#print(sd)
-
-sd= sdata.reindex(["b"])
-print(sd)
-print("\n----------------------\n")
-print(sdata["b"])
-print("\n----------------------\n")
-
-
-print(sdata.iloc[0])
-print(sdata.iloc[2])
-print("\n----------------------\n")
-print(sdata.iloc["a"])
-print(sdata.iloc["d"])
-
-print(sdata[0])
-"""
-
-#인덱싱 슬라이싱
-"""
-from pandas import Series as sr  
-
-dt = [10, 20,30, 40]
-idx = ["a", "b", "c", "d"]
-
-sdata = sr(data= dt, index= idx)
-
-print(sdata)
-print(sdata.loc["bc" : "cd"])
-print("\n----------------------\n")
-print(sdata.loc["bc" : "cd"])
-print("\n----------------------\n")
-print(sdata.loc["bc" : "cd"])
-print("\n----------------------\n")
-"""
-
-#인덱싱 행번호
-"""
-from pandas import Series as sr  
-
-dt = ["사과", "바나나", "수박", "참외"]
-idx = ["가", "나", "다", "라"]
-
-sdata = sr(data= dt, index= idx)
-
-print(sdata)
-print(sdata.loc[1:2])
-print("\n----------------------\n")
-print(sdata.loc[2:])
-print("\n----------------------\n")
-print(sdata.loc[:2])
-print("\n----------------------\n")
-
-#수정/추가/삭제
-from pandas import Series as sr  
-
-dt = ["alpha", "beta", "charlie", "delta"]
-idx = ["ab", "bc", "cd", "de"]
-
-sdata = sr(data= dt, index= idx)
-
-#sdata.loc["cd"] = "echo"
-#print(sdata)
-
-#print("\n-------------------------------\n")
-#sdata.loc[1] = "fox"
-#print(sdata)
-
-#추가
-#sdata.loc["ef"] = "golf"
-#print(sdata)
-
-#삭제
-#print("\n-------------------------------\n")
-#print(sdata.drop("bc"))
-#print("\n-------------------------------\n")
-#print(sdata.drop("cd"))
-#print(sd)
-"""
-
-#연산
-"""
-from pandas import Series as sr  
-
-s1 = sr([100, 200, 300], index=["a", "b", "c"])
-s2 = sr([100, 200, 300], index=["b", "c", "a"])
-
-
-sum_res = s1 + s2
-print(sum_res)
-print(sum_res.max())
-print(sum_res.mean())
-print(sum_res.min())
-print("\n-----------------------\n")
-
-um_res = s1 - s2
-print(sum_res)
-print(sum_res.max())
-print(sum_res.mean())
-print(sum_res.min())
-print("\n-----------------------\n")
-
-mul_rel = s1 * 10
-print(mul_rel)
-
-div_rel = s1 / 10
-print(div_rel)
-"""
-"""
-from pandas import Series as sr  
+import pandas as pd
 
 data = {
-    "삼성전자": "전기,전자",
-    "LG전자": "전기,전자",
-    "현대차": "운수장비",
-    "NAVER": "서비스업",
-    "카카오": "서비스업"
+    "x" : [10, 15, 20],
+    "y" : [50, 55, 60],
+    "z" : [100, 110, 120]
 }
 
-sdata = sr(data)
-uniq = sdata.unique()
-print(uniq)
+idx = ["x축", "y축", "z축"]
+
+fr = pd.DataFrame(data, index=idx)
+
+#print(fr)
+#print("\n------------------------\n")
+
+#print(fr["x"])
+#print(fr["z"])
+
+#print(fr.x)
+#print("\n------------------------\n")
+#print(fr.y)
+
+#print(fr.iloc[1])
+
+#print("\n------------------------\n")
+#print(fr.loc["y축"])
+
+#print("\n------------------------\n")
+
+#열추가
+frs = pd.DataFrame(fr,columns=["x", "y", "z", "t"])
+print(frs)
+print("\n-----------------------------\n")
+
+frs["t"] = [60, 120, 180]
+print(frs)
 
 
-sc = sdata.count()
-print(sc)
+#행 추가
+print("\n-----------------------------\n")
+frs.loc["t축"] = [100, 200, 300, 400]
+#frs.loc["t축"] = [100, 200, 300]
+print(frs)
 
-sv = sdata.value_counts()
-print(sv)
+
+#행 수정
+print("\n-----------------------------\n")
+frs.loc["t축"] = [500, 600, 700, 800]
+print(frs) 
+
+print("\n-----------------------------\n")
+
+#행 삭제
+frs.drop("x", axis=1, inplace=True)
+print(frs) 
+
+print("\n-----------------------------\n")
+#열 삭제
+frs.drop("x축", inplace=True)
+print(frs) 
+"""
+"""
+#컬럼 추가
+import pandas as pd
+
+dt = [[1,10,100],[2,20,200],[3,30,300]]
+col = ["x","y","z"]
+idx = ["x축","y축","z축"]
+
+
+#col = ["col1","col2","col3"]
+#idx = ["row1","row2","row3"]
+
+df = pd.DataFrame(data=dt,index=idx ,columns=col)
+
+print(df)
+#print(df["x"])
+#print(df["y"])
+
+print("\n-----------------------------\n")
+#print(df.loc["x축"])
+#print(df.loc["y축"])
+
+#print(df["col1"])
+
+#print(df + 1)
+
+#print(df.div(100))
+#print(df / 100)
+print("\n-----------------------------\n")
+
+#print(df.mul(100))
+#print(df * 100)
 """
 
-#필터링
+#셀럼 추가
+"""
+import pandas as pd
+
+dt = [[1,10,100],[2,20,200],[3,30,300]]
+col = ["col1","col2","col3"]
+idx = ["삼성","현대","LG"]
+
+df = pd.DataFrame(data=dt,index=idx ,columns=col)
+
+#print(df)
+#print(df["col1"])
+#print(df["y"])
+
+#print("\n-----------------------------\n")
+#(df.loc["현대"])
+#print(df.loc["y축"])
+
+#print(df["col1"])
+
+#print("\n-----------------------------\n")
+#print(df + 1)
+
+#print(df.div(100))
+#print(df / 100)
+#print("\n-----------------------------\n")
+
+#print(df.mul(100))
+#print(df * 100)
+
+#dt2  = [[0],[2],[3]]
+#df2 = pd.DataFrame(data=dt2,index=["삼성","현대","LG"],columns=["col2"])
+
+#df.div(df2)
+
+# 같은 인덱스끼리 연산
+
+
+dt2  = [[0],[2],[3]]
+df2 = pd.DataFrame(data=dt2,index=["삼성","현대","LG"],columns=["col2"])
+
+print(dt2)
+print("\n-----------------------------\n")
+print(df.div(df2))
+print(df.mul(df2))
+
+print("\n-----------------------------\n")
+print(df.div(df2, fill_value=100))
 """
 
-from pandas import Series as sr  
+#멀티인덱스
+"""
+import pandas as pd
 
-idx = ["a", "b", "c", "d", "e"]
-s1 = sr([1100, 270, 30, 450, 50], index=idx)
-s2 = sr([150, 740, 810, 40, 25], index=idx)
+idx = [('row1', 'val1'), ('row1', 'val2'), ('row2', 'val1'), ('row2', 'val2'), ('row2', 'val3'), ('row3', 'val2'),('row3', 'val3')]
+dt = [ [1,2,3], [4,5,6], [7,8,9], [10,11,12], [13,14,15], [16,17,18], [19,20,21]]
 
-# 시리즈내 데이터 비
-fil = s1 > 300
-print(fil)
-print("\n-----------------------\n")
-print(s1[fil])
-print(s1[fil].index)
+ind = pd.MultiIndex.from_tuples(idx)
+df = pd.DataFrame(dt, columns=['col1', 'col2', 'col3'], index = ind)
 
-print("\n-----------------------\n")
-# 시리즈간 비교
-fil1 = s2 > s1
-print(fil)
+print(df)
 
-print(s2[fil])
-print(s1[fil].index)
+print("\n-----------------------------\n")
 
-print("\n-----------------------\n")
-# 인덱싱 출력
-print(s2[s2 > s1].index)
+#print(df.loc["row3"])
+print(df.iloc[0])
+
+print("\n-----------------------------\n")
+print(df.loc[("row3", "val3")])
+
+print("\n-----------------------------\n")
+print(df.loc[("row3", "val3"), "col1"])
+
+print("\n-----------------------------\n")
+print(df.iloc[1][2])
 """
 
-#정렬
+#랜덤 데이터 생성
 """
-from pandas import Series as sr  
+import pandas as pd
+import numpy as np
 
-idx = ["a", "b", "c", "d", "e"]
-s1 = sr([1100, 270, 30, 450, 50], index=idx)
-s2 = sr([150, 740, 810, 40, 25], index=idx)
+dt = np.random.randint(10, size=(5, 5))
+df = pd.DataFrame(data=dt)
 
-sv= s1.sort_values()
-print(sv)
+print(df)
 
-print("\n-----------------------\n")
-svt= s1.sort_values(ascending=False)
-print(svt)
+print("\n-----------------------------\n")
+print(df[2])
+
+print("\n-----------------------------\n")
+print(df.loc[2])
+
+print("\n-----------------------------\n")
+print(df.loc[3][1])
+
+print("\n-----------------------------\n")
+print(df.head(2))
+
+print("\n-----------------------------\n")
+print(df.tail(3))
+
+print("\n-----------------------------\n")
+print(df.sample(3))
 """
+
+#테스트 파일 생성
+"""from faker import Faker as fk
+import os
+
+#temp = fk()
+temp = fk("ko-KR")
+print(temp.name())
+
+folder = "data/"
+if not os.path.isdir(folder):
+    os.mkdir(folder)
+
+with open(folder + "fktemp.csv", "w", encoding='utf8') as f :
+    f.write("name,address,postcode,company,job,phone,email,id,ip_prv,ip_pub,catch_parase,color\n")
+
+with open(folder + "fktemp.csv", "a", newline='', encoding='utf8') as f :
+    for i in range(30) :
+        f.write(temp.name() + "," + 
+            temp.address() + "," + 
+            temp.postcode() + "," + 
+            temp.company() + "," + 
+            temp.job() + "," + 
+            temp.phone_number() + "," + 
+            temp.email() + "," + 
+            temp.user_name() + "," + 
+            temp.ipv4_private() + "," + 
+            temp.ipv4_public() + "," + 
+            temp.catch_phrase() + "," + 
+            temp.color_name() + "\n")
+        """
+        
+# 파일 열기
+
+import pandas as pd
+
+folder = "data/"
+target = folder + "fktemp.csv"
+
+df = pd.read_csv(target)
+
+#print(df)
+#print(df.values[0])
+
+
+# 인덱스 설정 확인
+#print(df.index)
+
+#print(df.dtypes)
+
+
+#print(type(df))
+
+#print("\n-----------------------------------\n")
+#print(df.head())
+#print("\n-----------------------------------\n")
+
+#print(df.head(3))
+#print("\n-----------------------------------\n")
+
+#print(df.tail())
+#print("\n-----------------------------------\n")
+
+#print(df.tail(3))
+#print("\n-----------------------------------\n")
+
+#print(df.sample())
+#print(df.sample(4))
+
+#print(df.values)
+#print("\n-----------------------------------\n")
+#print(df.values[24])
+
+#for el in df.values[12] :
+#     print(el)
+
+#print(df.info())
+
+#print(df.isnull())
+#print(df.isnull().sum())
+
+#print(df.name)
+#print(df.postcode)
+#print(df.job)
+#print(df.phone)
+#print(df.id)
+#print(df.company)
+#print(df.catch_perase)
+#print(df.color)
+
+#print(df["name"])
+#print(df["color"])
+#print(df["postcode"])
+#print(df["phone"])
+#print(df["id"])
+#print(df["company"])
+
+#print(df[["name", id]])
+#post = df[["name", "address", "postcode"]]
+#print(post)
+
+#print(df.postcode.describe())
+#print(df.color.describe())
+
+#print(df.color.count())
+#print(df.color.value_counts())
+
+#temp = df.postcode.sum() / df.name.count()
+#print(temp)
+
+#print(df.name == "이수빈")
+
+# temp = df[df.color == "Linen"].head(1)
+
+#temp = df[df.color == "Linen"].head(2)
+#print(temp) 
