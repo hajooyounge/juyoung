@@ -219,7 +219,7 @@ print(df.sample(3))
 """
 
 #테스트 파일 생성
-"""from faker import Faker as fk
+from faker import Faker as fk
 import os
 
 #temp = fk()
@@ -247,17 +247,17 @@ with open(folder + "fktemp.csv", "a", newline='', encoding='utf8') as f :
             temp.ipv4_public() + "," + 
             temp.catch_phrase() + "," + 
             temp.color_name() + "\n")
-        """
+        
         
 # 파일 열기
-
+"""
 import pandas as pd
 
 folder = "data/"
 target = folder + "fktemp.csv"
 
 df = pd.read_csv(target)
-
+"""
 #print(df)
 #print(df.values[0])
 
