@@ -1,6 +1,7 @@
 #타이타닉 정보
 """
-import pandas as pd 
+import 
+pip install matplotlibas pd 
 tr = pd.read_csv("data/train.csv")
 
 #print(tr)

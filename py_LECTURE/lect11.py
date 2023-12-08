@@ -152,8 +152,9 @@ x_years = ['2020', '2021', '2022']
 y_data = [100, 400, 900]
 clr = ["r", "lime", "b"]
 
-#plt.bar(x_years, y_data)
+plt.bar(x_years, y_data)
 
+plt.show()
 
 
 #색지정
